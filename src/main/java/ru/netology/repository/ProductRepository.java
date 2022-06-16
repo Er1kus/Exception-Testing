@@ -6,6 +6,10 @@ public class ProductRepository {
     private Product[] items = new Product[0];
 
     public void save(Product item) {
+        if (findById(item.getId()) != null) {                                  //задача 2*
+            throw new AlreadyExistsException(                                  //задача 2*
+                    "Element with id: " + item.getId() + " is already added"); //задача 2*
+        }                                                                      //задача 2*
         int length = items.length + 1;
         Product[] tmp = new Product[length];
         System.arraycopy(items, 0, tmp, 0, items.length);
@@ -19,9 +23,9 @@ public class ProductRepository {
     }
 
     public Product[] removeById(int id) {
-        if (findById(id) == null) {
-            throw new NotFoundException("Element with id: " + id + " not found");
-        }
+        if (findById(id) == null) {                                              //задача 1
+            throw new NotFoundException("Element with id: " + id + " not found");//задача 1
+        }                                                                        //задача 1
         int length = items.length - 1;
         Product[] tmp = new Product[length];
         int index = 0;
@@ -35,13 +39,13 @@ public class ProductRepository {
         return tmp;
     }
 
-    public Product[] findById(int id) {
-        for (Product item : items) {
-            if (item.getId() == id) {
-                return new Product[]{item};
-            }
-        }
-        return null;
+    public Product[] findById(int id) {                                           //задача 1
+        for (Product item : items) {                                              //задача 1
+            if (item.getId() == id) {                                             //задача 1
+                return new Product[]{item};                                       //задача 1
+            }                                                                     //задача 1
+        }                                                                         //задача 1
+        return null;                                                              //задача 1
     }
 
 }
